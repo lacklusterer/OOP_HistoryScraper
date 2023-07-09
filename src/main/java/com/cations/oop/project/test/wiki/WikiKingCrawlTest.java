@@ -1,4 +1,4 @@
-package com.cations.oop.project.test;
+package com.cations.oop.project.test.wiki;
 
 import com.cations.oop.project.crawler.WikiKingCrawler;
 
