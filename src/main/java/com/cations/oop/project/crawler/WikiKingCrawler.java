@@ -17,7 +17,7 @@ public class WikiKingCrawler extends BaseCrawler {
         Elements tables = document.select("table:not(:first-child)"); // Select all tables on the page
 
         BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile));
-        BufferedWriter linkWriter = new BufferedWriter(new FileWriter("links.txt"));
+        BufferedWriter linkWriter = new BufferedWriter(new FileWriter("out/wiki/wikiUrlPaths/kings.txt"));
 
         int tableCount = 0;
         int totalKing = 0;
@@ -53,8 +53,11 @@ public class WikiKingCrawler extends BaseCrawler {
                     writer.write("Hyperlink link: " + relativeURL + "\n");
                     writer.newLine();
 
-                    linkWriter.write("https://vi.wikipedia.org" + relativeURL);
-                    linkWriter.newLine();
+                    if (relativeURL.length() >= 6) {
+
+                        linkWriter.write(relativeURL.substring(6));
+                        linkWriter.newLine();
+                    }
 
                     System.out.println("Added a king, king count: " + rowCount + ", king so far: " + totalKing);
                 }
