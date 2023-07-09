@@ -14,10 +14,10 @@ public class WikiKingScrapeTest {
 
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String url;
-            int count = 0;
-            while ((url = reader.readLine()) != null && count <= 5) {
+            // int count = 0;
+            while ((url = reader.readLine()) != null /*&& count <= 10*/) {
                 scraper.scrape(url);
-                count++;
+                // count++;
             }
         } catch (IOException e) {
             e.printStackTrace();

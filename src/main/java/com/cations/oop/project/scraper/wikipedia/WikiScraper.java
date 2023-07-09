@@ -24,6 +24,8 @@ public class WikiScraper extends BaseScrapper {
             System.out.println("File already exists: " + filePath);
             return;
         }
+
+        System.out.println("Generating...");
         // Get data from info box
         Element infoBox = document.selectFirst(".infobox");
 
