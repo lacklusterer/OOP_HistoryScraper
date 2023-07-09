@@ -1,6 +1,7 @@
 package com.cations.oop.project.test.wiki;
 
 import com.cations.oop.project.scraper.wikipedia.WikiApiScraper;
+import com.cations.oop.project.scraper.wikipedia.WikiScraper;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -8,15 +9,15 @@ import java.io.IOException;
 
 public class WikiKingScrapeTest {
     public static void main(String[] args) {
-        WikiApiScraper scraper = new WikiApiScraper();
+        WikiScraper scraper = new WikiScraper();
 
         String filePath = "out/wiki/wikiUrlPaths/kings.txt";
 
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String king;
+            String url;
             int count = 0;
-            while ((king = reader.readLine()) != null && count <= 5) {
-                scraper.getJson(king);
+            while ((url = reader.readLine()) != null && count <= 5) {
+                scraper.scrape(url);
                 count++;
             }
         } catch (IOException e) {
