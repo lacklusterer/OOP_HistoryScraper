@@ -3,29 +3,30 @@ package com.cations.oop.project.crawler;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 import java.io.IOException;
 
 public abstract class BaseCrawler {
+    protected Document document;
+    protected String url;
 
-    public void crawl(String url) {
+    public void crawl() {
         try {
-            Document document = Jsoup.connect(url).get();
+            document = Jsoup.connect(url).get();
             processDocument(document);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    protected abstract void processDocument(Document document);
+    protected abstract void processDocument(Document document) throws IOException;
 
     protected String getText(Element element, String selector) {
         Element selectedElement = element.selectFirst(selector);
         return (selectedElement != null) ? selectedElement.text() : "";
     }
 
-    protected Elements getElements(Document document, String selector) {
-        return document.select(selector);
+    public void setUrl(String url) {
+        this.url = url;
     }
 }
