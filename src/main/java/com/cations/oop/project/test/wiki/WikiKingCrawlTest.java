@@ -7,7 +7,6 @@ public class WikiKingCrawlTest {
         // Obtain king list from wiki
         WikiKingCrawler wikiKingCrawler = new WikiKingCrawler();
         wikiKingCrawler.setUrl("https://vi.wikipedia.org/wiki/Vua_Vi%E1%BB%87t_Nam");
-        wikiKingCrawler.setOutputFile("output.txt");
 
         wikiKingCrawler.crawl();
     }
