@@ -6,6 +6,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Objects;
@@ -15,8 +16,14 @@ public class WikiScraper extends BaseScrapper {
     @Override
     protected void processDoc(Document document) {
         String name = Objects.requireNonNull(document.selectFirst("#firstHeading")).text();
-        System.out.println(name);
 
+        // Check if the file already exists
+        String filePath = "out/wiki/wikiScrappedKing/" + name + ".json";
+        File existingFile = new File(filePath);
+        if (existingFile.exists()) {
+            System.out.println("File already exists: " + filePath);
+            return;
+        }
         // Get data from info box
         Element infoBox = document.selectFirst(".infobox");
 
@@ -44,8 +51,9 @@ public class WikiScraper extends BaseScrapper {
             }
 
             // Write the JSON data to file
-            try (FileWriter writer = new FileWriter("out/wiki/wikiScrappedKing/" + name + ".json")) {
+            try (FileWriter writer = new FileWriter(filePath)) {
                 gson.toJson(dataObject, writer);
+                System.out.println("Data saved to file: " + filePath);
             } catch (IOException e) {
                 e.printStackTrace();
             }
