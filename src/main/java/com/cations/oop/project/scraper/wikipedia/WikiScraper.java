@@ -44,7 +44,7 @@ public class WikiScraper extends BaseScrapper {
             }
 
             // Write the JSON data to file
-            try (FileWriter writer = new FileWriter("out/wiki/wikiScrappedKing/output.json")) {
+            try (FileWriter writer = new FileWriter("out/wiki/wikiScrappedKing/" + name + ".json")) {
                 gson.toJson(dataObject, writer);
             } catch (IOException e) {
                 e.printStackTrace();
