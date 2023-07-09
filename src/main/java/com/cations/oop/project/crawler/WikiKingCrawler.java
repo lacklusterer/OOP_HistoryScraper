@@ -8,6 +8,7 @@ import org.jsoup.select.Elements;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URLDecoder;
 
 public class WikiKingCrawler extends BaseCrawler {
     private String outputFile;
@@ -54,8 +55,8 @@ public class WikiKingCrawler extends BaseCrawler {
                     writer.newLine();
 
                     if (relativeURL.length() >= 6) {
-
-                        linkWriter.write(relativeURL.substring(6));
+                        String decodedURL = URLDecoder.decode(relativeURL.substring(6), "UTF-8");
+                        linkWriter.write(decodedURL);
                         linkWriter.newLine();
                     }
 
