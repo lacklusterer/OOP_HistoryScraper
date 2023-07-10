@@ -12,14 +12,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Objects;
 
-public class WikiScraper extends BaseScrapper {
+public class WikiPersonScraper extends BaseScrapper {
 
     @Override
-    protected void processDoc(Document document) {
+    protected void processDoc(Document document, String savePath) {
         String name = Objects.requireNonNull(document.selectFirst("#firstHeading")).text();
 
         // Check if the file already exists
-        String filePath = "out/wiki/wikiScrappedKing/" + name + ".json";
+        String filePath = "out/wiki/" + savePath + "/" + name + ".json";
         File existingFile = new File(filePath);
         if (existingFile.exists()) {
             System.out.println("File already exists: " + filePath);

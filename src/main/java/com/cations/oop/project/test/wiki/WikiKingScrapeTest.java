@@ -1,6 +1,6 @@
 package com.cations.oop.project.test.wiki;
 
-import com.cations.oop.project.operations.scraper.wikipedia.WikiScraper;
+import com.cations.oop.project.operations.scraper.wikipedia.WikiPersonScraper;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class WikiKingScrapeTest {
     public static void main(String[] args) {
-        WikiScraper scraper = new WikiScraper();
+        WikiPersonScraper scraper = new WikiPersonScraper();
 
         String filePath = "out/wiki/wikiUrlPaths/kings.txt";
 
@@ -16,7 +16,7 @@ public class WikiKingScrapeTest {
             String url;
             // int count = 0;
             while ((url = reader.readLine()) != null /*&& count <= 10*/) {
-                scraper.scrape(url);
+                scraper.scrape(url, "out/wiki/wikiScrappedKing/");
                 // count++;
             }
         } catch (IOException e) {
