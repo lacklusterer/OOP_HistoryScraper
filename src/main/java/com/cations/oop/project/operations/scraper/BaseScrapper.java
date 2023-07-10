@@ -33,7 +33,7 @@ public abstract class BaseScrapper {
             return;
         }
 
-        System.out.println("Generating...");
+        System.out.println("Generating json ...");
 
         // Get infobox
         Element infoBox = document.selectFirst(".infobox");
@@ -42,7 +42,7 @@ public abstract class BaseScrapper {
             Gson gson = new Gson();
 
             // Get info from infobox
-            JsonObject jsonObject = getInfo(infoBox);
+            JsonObject jsonObject = getInfo(infoBox, name);
 
             // Write the JSON data to file
             try (FileWriter writer = new FileWriter(filePath)) {
@@ -56,5 +56,5 @@ public abstract class BaseScrapper {
         }
     }
 
-    protected abstract JsonObject getInfo(Element infoBox);
+    protected abstract JsonObject getInfo(Element infoBox, String name);
 }

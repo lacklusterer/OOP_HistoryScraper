@@ -6,16 +6,12 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class WikiPersonScraper extends BaseScrapper {
-
-    protected JsonObject getInfo(Element infoBox) {
+    protected JsonObject getInfo(Element infoBox, String name) {
         Elements rows = infoBox.select("tr");
 
         // Create a JsonObject to hold the data
         JsonObject dataObject = new JsonObject();
 
-        // Get the name from the infobox header
-        Element header = infoBox.selectFirst(".infobox-above");
-        String name = header.selectFirst(".fn").text();
         dataObject.addProperty("Name", name);
 
         // Iterate over the infobox's rows
