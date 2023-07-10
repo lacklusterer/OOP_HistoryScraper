@@ -6,11 +6,9 @@ import org.jsoup.nodes.Document;
 import java.io.IOException;
 
 public abstract class BaseCrawler {
-    protected Document document;
-
     public void crawl(String url) {
         try {
-            document = Jsoup.connect(url).get();
+            Document document = Jsoup.connect(url).get();
             findLinks(document);
         } catch (IOException e) {
             e.printStackTrace();

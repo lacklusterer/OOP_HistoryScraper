@@ -1,7 +1,9 @@
-package com.cations.oop.project.scraper.wikipedia;
+package com.cations.oop.project.scraper;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+
+import java.io.IOException;
 
 public abstract class BaseScrapper {
     public void scrape(String url) {
@@ -9,7 +11,7 @@ public abstract class BaseScrapper {
             System.out.println("Scraping: " + url);
             Document document = Jsoup.connect(url).get();
             processDoc(document);
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
