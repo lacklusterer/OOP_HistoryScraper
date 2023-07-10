@@ -1,6 +1,6 @@
 package com.cations.oop.project.test.wiki;
 
-import com.cations.oop.project.crawler.WikiKingCrawler;
+import com.cations.oop.project.operations.crawler.wikipedia.WikiKingCrawler;
 
 public class WikiKingCrawlTest {
     public static void main(String[] args) {

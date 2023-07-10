@@ -1,4 +1,4 @@
-package com.cations.oop.project.crawler;
+package com.cations.oop.project.operations.crawler;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

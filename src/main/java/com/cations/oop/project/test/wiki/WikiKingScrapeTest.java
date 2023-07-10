@@ -1,6 +1,6 @@
 package com.cations.oop.project.test.wiki;
 
-import com.cations.oop.project.scraper.wikipedia.WikiScraper;
+import com.cations.oop.project.operations.scraper.wikipedia.WikiScraper;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

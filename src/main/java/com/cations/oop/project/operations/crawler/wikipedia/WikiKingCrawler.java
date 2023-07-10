@@ -1,5 +1,6 @@
-package com.cations.oop.project.crawler;
+package com.cations.oop.project.operations.crawler.wikipedia;
 
+import com.cations.oop.project.operations.crawler.BaseCrawler;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;

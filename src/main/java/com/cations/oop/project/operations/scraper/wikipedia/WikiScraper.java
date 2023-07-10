@@ -1,5 +1,6 @@
-package com.cations.oop.project.scraper.wikipedia;
+package com.cations.oop.project.operations.scraper.wikipedia;
 
+import com.cations.oop.project.operations.scraper.BaseScrapper;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.jsoup.nodes.Document;
