@@ -15,27 +15,8 @@ import java.util.Objects;
 public class WikiPersonScraper extends BaseScrapper {
 
     @Override
-    protected void processDoc(Document document, String savePath) {
-        String name = Objects.requireNonNull(document.selectFirst("#firstHeading")).text();
-
-        // Check if the file already exists
-        String filePath = "out/wiki/" + savePath + "/" + name + ".json";
-        File existingFile = new File(filePath);
-        if (existingFile.exists()) {
-            System.out.println("File already exists: " + filePath);
-            return;
-        }
-
-        System.out.println("Generating...");
-        // Get data from info box
-        Element infoBox = document.selectFirst(".infobox");
-
-        // Output found data into json
-        if (infoBox != null) {
+    protected JsonObject getInfo(Element infoBox, String name) {
             Elements rows = infoBox.select("tr");
-
-            // Create a Gson instance
-            Gson gson = new Gson();
 
             // Create a JsonObject to hold the data
             JsonObject dataObject = new JsonObject();
@@ -52,16 +33,6 @@ public class WikiPersonScraper extends BaseScrapper {
                     dataObject.addProperty(label.text(), value.text());
                 }
             }
-
-            // Write the JSON data to file
-            try (FileWriter writer = new FileWriter(filePath)) {
-                gson.toJson(dataObject, writer);
-                System.out.println("Data saved to file: " + filePath);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            System.out.println("Info box not found on the page.");
-        }
+            return dataObject;
     }
 }
