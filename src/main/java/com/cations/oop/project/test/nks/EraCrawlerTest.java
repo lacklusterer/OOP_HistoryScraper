@@ -1,10 +1,10 @@
 package com.cations.oop.project.test.nks;
 
-import com.cations.oop.project.operations.crawler.nguoikesu.NksEraCrawler;
+import com.cations.oop.project.operations.crawler.nguoikesu.NksCharCrawler;
 
 public class EraCrawlerTest {
     public static void main(String[] args) {
-        NksEraCrawler crawler = new NksEraCrawler();
-        crawler.crawl("https://nguoikesu.com/dong-lich-su");
+        NksCharCrawler crawler = new NksCharCrawler();
+        crawler.crawl("https://nguoikesu.com/nhan-vat?start=1450");
     }
 }
