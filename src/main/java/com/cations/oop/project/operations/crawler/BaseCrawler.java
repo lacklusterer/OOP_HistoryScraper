@@ -9,11 +9,12 @@ public abstract class BaseCrawler {
     public void crawl(String url) {
         try {
             Document document = Jsoup.connect(url).get();
-            findLinks(document);
+            System.out.println("Connected to \"" + url + "\"!");
+            process(document);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    protected abstract void findLinks(Document document) throws IOException;
+    protected abstract void process(Document document) throws IOException;
 }

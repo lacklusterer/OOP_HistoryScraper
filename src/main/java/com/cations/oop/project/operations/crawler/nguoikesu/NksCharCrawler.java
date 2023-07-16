@@ -5,52 +5,77 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.util.HashSet;
+import java.util.Set;
 
 public class NksCharCrawler extends BaseCrawler {
     @Override
-    protected void findLinks(Document document) throws IOException {
+    protected void process(Document document) throws IOException {
+        // get blog__items
         Elements blogItems = document.select("div.com-content-category-blog__item");
 
-        try {
-            // Specify the file path where you want to save the data
-            String filePath = "out/nks/test.csv";
+        String filePath = "out/nks/test.csv";
 
-            // Create a FileWriter and BufferedWriter to write to the file
-            FileWriter fileWriter = new FileWriter(filePath);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        // create a HashSet to keep track of data
+        Set<String> existingItems = new HashSet<>();
+        File file = new File(filePath);
+        if (file.exists()) {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line;
+            // skip header
+            reader.readLine();
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                // add title to existing items
+                existingItems.add(parts[0]);
+            }
+            reader.close();
+        }
 
-            // Write the CSV header
+        // FileWriter and BufferedWriter
+        FileWriter fileWriter = new FileWriter(filePath, true);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+        // write CSV header if file empty
+        if (file.length() == 0) {
             bufferedWriter.write("Name,Info");
             bufferedWriter.newLine();
+        }
 
-            for (Element blogItem : blogItems) {
-                // Extract title
-                Element titleElement = blogItem.selectFirst("h2 a");
-                String title = titleElement.text();
-                System.out.println("Title: " + title);
+        // iterate over blogItems and extract data for each blogItem
+        for (Element blogItem : blogItems) {
+            // extract title
+            Element titleElement = blogItem.selectFirst("h2 a");
+            String title = titleElement.text();
+            System.out.println("Title: " + title);
 
-                // Extract info
-                String info = blogItem.selectFirst("p").text();
-                System.out.println("p: " + info);
-
-                System.out.println();
-
-                // Write the data to the CSV file
-                bufferedWriter.write("\"" + title + "\"" + "," + "\"" + info + "\"");
-                bufferedWriter.newLine();
+            // check if the item already exists
+            if (existingItems.contains(title)) {
+                System.out.println(title + " already exists!");
+                continue;
             }
 
-            // Close the resources
-            bufferedWriter.close();
-            fileWriter.close();
+            // extract info
+            String info = blogItem.selectFirst("p").text();
+            System.out.println("p: " + info);
 
-            System.out.println("Data saved successfully.");
+            // write data to the CSV file
+            bufferedWriter.write(title+ "," + "\"" + info + "\"");
+            bufferedWriter.newLine();
 
-        } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Data for " + title + " saved successfully.\n" );
         }
+
+        // add the item's title to the existingItems Set
+        for (Element blogItem : blogItems) {
+            Element titleElement = blogItem.selectFirst("h2 a");
+            String title = titleElement.text();
+            existingItems.add(title);
+        }
+
+        bufferedWriter.close();
+        fileWriter.close();
+
     }
 }

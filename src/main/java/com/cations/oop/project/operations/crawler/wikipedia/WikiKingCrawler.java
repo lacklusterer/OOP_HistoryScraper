@@ -14,7 +14,7 @@ import java.nio.charset.StandardCharsets;
 public class WikiKingCrawler extends BaseCrawler {
 
     @Override
-    protected void findLinks(Document document) throws IOException {
+    protected void process(Document document) throws IOException {
         Elements tables = document.select("table:not(:first-child)"); // Select all tables on the page
 
         BufferedWriter linkWriter = new BufferedWriter(new FileWriter("out/wiki/wikiUrlPaths/kings.txt"));

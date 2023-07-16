@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class NksEraCrawler extends BaseCrawler {
     @Override
-    protected void findLinks(Document document) throws IOException {
+    protected void process(Document document) throws IOException {
         Element moduleCt = document.selectFirst("div.module-ct");
         Elements links = moduleCt.select("a[href^=/dong-lich-su/]");
 
