@@ -43,6 +43,7 @@ public abstract class BaseScrapper {
 
             // Get info from infobox
             JsonObject jsonObject = getInfo(infoBox, name);
+            // TODO: improve getInfo and its subclass
 
             // Write the JSON data to file
             try (FileWriter writer = new FileWriter(filePath)) {

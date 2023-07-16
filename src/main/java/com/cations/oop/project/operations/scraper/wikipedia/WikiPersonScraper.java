@@ -7,22 +7,25 @@ import org.jsoup.select.Elements;
 
 public class WikiPersonScraper extends BaseScrapper {
     protected JsonObject getInfo(Element infoBox, String name) {
+        // JsonObject to hold the data
+        JsonObject personInfo = new JsonObject();
         Elements rows = infoBox.select("tr");
 
-        // Create a JsonObject to hold the data
-        JsonObject dataObject = new JsonObject();
+        personInfo.addProperty("Name", name);
 
-        dataObject.addProperty("Name", name);
-
-        // Iterate over the infobox's rows
+        // Iterate over infobox's rows
         for (Element row : rows) {
-            Element label = row.selectFirst("th");
-            Element value = row.selectFirst("td");
+            Element headerElement = row.selectFirst("th");
+            Element valueElement = row.selectFirst("td");
 
-            if (label != null && value != null) {
-                dataObject.addProperty(label.text(), value.text());
+            if (headerElement != null && valueElement != null) {
+                String header = headerElement.text();
+                String value = valueElement.text();
+
+                personInfo.addProperty(header, value);
             }
         }
-        return dataObject;
+
+        return personInfo;
     }
 }
