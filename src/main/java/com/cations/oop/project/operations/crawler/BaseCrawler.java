@@ -9,7 +9,7 @@ public abstract class BaseCrawler {
     public void crawl(String url) {
         try {
             Document document = Jsoup.connect(url).get();
-            System.out.println("Connected to \"" + url + "\"!");
+            System.out.println("Connected to \"" + url + "\"!\n");
             process(document);
         } catch (IOException e) {
             e.printStackTrace();

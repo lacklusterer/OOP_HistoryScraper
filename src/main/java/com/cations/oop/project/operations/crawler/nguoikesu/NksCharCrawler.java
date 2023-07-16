@@ -10,6 +10,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class NksCharCrawler extends BaseCrawler {
+    // create a HashSet to keep track of data
+    Set<String> existingItems = new HashSet<>();
+
     @Override
     protected void process(Document document) throws IOException {
         // get blog__items
@@ -17,8 +20,7 @@ public class NksCharCrawler extends BaseCrawler {
 
         String filePath = "out/nks/test.csv";
 
-        // create a HashSet to keep track of data
-        Set<String> existingItems = new HashSet<>();
+        // keep track of existing data
         File file = new File(filePath);
         if (file.exists()) {
             BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -52,13 +54,13 @@ public class NksCharCrawler extends BaseCrawler {
 
             // check if the item already exists
             if (existingItems.contains(title)) {
-                System.out.println(title + " already exists!");
+                System.out.println(title + " already exists!\n");
                 continue;
             }
 
             // extract info
             String info = blogItem.selectFirst("p").text();
-            System.out.println("p: " + info);
+            System.out.println("Info: " + info);
 
             // write data to the CSV file
             bufferedWriter.write(title+ "," + "\"" + info + "\"");
@@ -76,6 +78,10 @@ public class NksCharCrawler extends BaseCrawler {
 
         bufferedWriter.close();
         fileWriter.close();
+        System.out.println("Collected data: " + getCollectedCount() + "\n");
+    }
 
+    public int getCollectedCount() {
+        return existingItems.size();
     }
 }
