@@ -86,7 +86,7 @@ public class NKSCharCrawler extends BaseCrawler {
         for (Element blogItem : blogItems) {
             Element titleElement = blogItem.selectFirst("h2 a");
             String title = titleElement.text();
-            existingItems.add(title);
+            existingItems.add("\"" + title + "\"");
         }
 
         bufferedWriter.close();
