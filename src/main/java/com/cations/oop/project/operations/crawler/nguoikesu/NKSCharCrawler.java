@@ -9,7 +9,7 @@ import java.io.*;
 import java.util.HashSet;
 import java.util.Set;
 
-public class NksCharCrawler extends BaseCrawler {
+public class NKSCharCrawler extends BaseCrawler {
     // create a HashSet to keep track of data
     Set<String> existingItems = new HashSet<>();
 
@@ -41,7 +41,7 @@ public class NksCharCrawler extends BaseCrawler {
 
         // write CSV header if file empty
         if (file.length() == 0) {
-            bufferedWriter.write("Name,Info");
+            bufferedWriter.write("Name,Info,URL");
             bufferedWriter.newLine();
         }
 
@@ -62,8 +62,12 @@ public class NksCharCrawler extends BaseCrawler {
             String info = blogItem.selectFirst("p").text();
             System.out.println("Info: " + info);
 
+            String itemUrl = titleElement.attr("href");
+            System.out.println("URL: " + itemUrl);
+
+
             // write data to the CSV file
-            bufferedWriter.write(title+ "," + "\"" + info + "\"");
+            bufferedWriter.write(title + "," + "\"" + info + "\"" + itemUrl);
             bufferedWriter.newLine();
 
             System.out.println("Data for " + title + " saved successfully.\n" );
