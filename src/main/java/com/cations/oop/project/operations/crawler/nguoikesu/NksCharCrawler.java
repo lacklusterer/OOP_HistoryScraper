@@ -5,6 +5,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class NksCharCrawler extends BaseCrawler {
@@ -12,21 +14,43 @@ public class NksCharCrawler extends BaseCrawler {
     protected void findLinks(Document document) throws IOException {
         Elements blogItems = document.select("div.com-content-category-blog__item");
 
-        for (Element blogItem : blogItems) {
-            // Extract title
-            Element titleElement = blogItem.selectFirst("h2 a");
-            String title = titleElement.text();
-            System.out.println("Title: " + title);
+        try {
+            // Specify the file path where you want to save the data
+            String filePath = "out/nks/test.csv";
 
-            // Extract link
-            String postUrl = titleElement.attr("href");
-            System.out.println("URL: " + postUrl);
+            // Create a FileWriter and BufferedWriter to write to the file
+            FileWriter fileWriter = new FileWriter(filePath);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-            // Extract info
-            String info = blogItem.selectFirst("p").text();
-            System.out.println("p: " + info);
+            // Write the CSV header
+            bufferedWriter.write("Name,Info");
+            bufferedWriter.newLine();
 
-            System.out.println();
+            for (Element blogItem : blogItems) {
+                // Extract title
+                Element titleElement = blogItem.selectFirst("h2 a");
+                String title = titleElement.text();
+                System.out.println("Title: " + title);
+
+                // Extract info
+                String info = blogItem.selectFirst("p").text();
+                System.out.println("p: " + info);
+
+                System.out.println();
+
+                // Write the data to the CSV file
+                bufferedWriter.write("\"" + title + "\"" + "," + "\"" + info + "\"");
+                bufferedWriter.newLine();
+            }
+
+            // Close the resources
+            bufferedWriter.close();
+            fileWriter.close();
+
+            System.out.println("Data saved successfully.");
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
