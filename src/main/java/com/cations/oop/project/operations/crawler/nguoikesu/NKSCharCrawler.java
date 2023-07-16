@@ -47,27 +47,36 @@ public class NKSCharCrawler extends BaseCrawler {
 
         // iterate over blogItems and extract data for each blogItem
         for (Element blogItem : blogItems) {
-            // extract title
             Element titleElement = blogItem.selectFirst("h2 a");
+
+            // extract title
             String title = titleElement.text();
             System.out.println("Title: " + title);
 
             // check if the item already exists
-            if (existingItems.contains(title)) {
+            if (existingItems.contains("\"" + title + "\"")) {
                 System.out.println(title + " already exists!\n");
                 continue;
             }
 
             // extract info
-            String info = blogItem.selectFirst("p").text();
-            System.out.println("Info: " + info);
+            String info = "No info";
+            try {
+                info = blogItem.selectFirst("p").text();
+                System.out.println("Info: " + info);
+            } catch (NullPointerException e) {
+                System.out.println("Info is empty!");
+            }
 
-            String itemUrl = titleElement.attr("href");
+            // deal with double quote in info
+            info = info.replace("\"", "\"\"");
+
+            // extract url
+            String itemUrl = "https://nguoikesu.com" + titleElement.attr("href");
             System.out.println("URL: " + itemUrl);
 
-
             // write data to the CSV file
-            bufferedWriter.write(title + "," + "\"" + info + "\"" + itemUrl);
+            bufferedWriter.write("\"" + title + "\",\"" + info + "\",\"" + itemUrl + "\"");
             bufferedWriter.newLine();
 
             System.out.println("Data for " + title + " saved successfully.\n" );
