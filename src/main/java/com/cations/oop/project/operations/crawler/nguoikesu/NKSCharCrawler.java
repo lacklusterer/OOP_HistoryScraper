@@ -5,14 +5,16 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.*;
 import java.util.HashSet;
-import java.util.Set;
 
 public class NKSCharCrawler extends BaseCrawler {
 
+    public NKSCharCrawler(String filePath) {
+        super(filePath);
+    }
+
     @Override
-    protected String process(Document document, Set<String> existingItems) {
+    protected String process(Document document, HashSet<String> existingItems) {
 
         StringBuilder stringBuilder = new StringBuilder();
 

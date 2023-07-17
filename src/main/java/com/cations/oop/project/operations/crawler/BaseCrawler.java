@@ -6,26 +6,24 @@ import org.jsoup.nodes.Document;
 import java.io.*;
 import java.net.SocketTimeoutException;
 import java.util.HashSet;
-import java.util.Set;
 
 public abstract class BaseCrawler {
-
-    Set<String> existingItems;
+    HashSet<String> existingItems;
     String filePath;
 
-    public BaseCrawler() {
-        // create a HashSet to keep track of data
+    public BaseCrawler(String filePath) {
         this.existingItems  = new HashSet<>();
+        this.filePath = filePath;
     }
 
-    public void crawl(String url, String saveFile) {
+    public void crawl(String url) {
         while (true) {
             try {
                 System.out.println("Connecting...");
                 Document document = Jsoup.connect(url).get();
                 System.out.println("Connected to \"" + url + "\"!\n");
 
-                operate(document, saveFile, existingItems);
+                operate(document, filePath, existingItems);
 
                 return; // breaks look if successfully connects
             } catch (SocketTimeoutException e) {
@@ -36,15 +34,14 @@ public abstract class BaseCrawler {
             }
         }
     }
-    protected abstract String process(Document document, Set<String> existingItems) throws IOException;
+    protected abstract String process(Document document, HashSet<String> existingItems) throws IOException;
 
     public int getCollectedCount() {
         return existingItems.size();
     }
 
-    protected void operate(Document document, String saveFile, Set<String> existingItems) throws IOException {
+    protected void operate(Document document, String filePath, HashSet<String> existingItems) throws IOException {
         // keep track of existing data
-        String filePath = "out/nks/" + saveFile;
         File file = new File(filePath);
         if (file.exists()) {
             BufferedReader reader = new BufferedReader(new FileReader(file));
