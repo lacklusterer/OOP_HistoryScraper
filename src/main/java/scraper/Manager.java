@@ -7,9 +7,18 @@ import java.util.Set;
 
 import database.Database;
 
+/**
+ * Handles the forking pages from a root (home) page and groups results.
+ *
+ * <p>A BFS algorithm is used to traverse the pages. Skip a page if it fails to
+ * load.
+ */
 public class Manager {
 	private final Database result = new Database();
 
+	/**
+	 * @param rootPage Usually the top page of a domain.
+	 */
 	public Manager(Page rootPage) {
 		Set<Page> parsed = new HashSet<>();
 		Queue<Page> pages = new ArrayDeque<>();
@@ -28,5 +37,8 @@ public class Manager {
 		}
 	}
 
+	/**
+	 * @return The merged results from each page found from the root page.
+	 */
 	public Database getResult() { return result; }
 }

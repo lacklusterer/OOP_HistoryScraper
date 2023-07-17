@@ -9,6 +9,9 @@ import entity.Festival;
 import entity.Reign;
 import entity.Relic;
 
+/**
+ * Used for storing infomation for all types of entites.
+ */
 public class Database {
 	private final Set<Character> characters = new HashSet<>();
 	private final Set<Event> events = new HashSet<>();
