@@ -6,15 +6,15 @@ import java.util.Set;
 import entity.type.Date;
 
 public class Festival extends Entity {
-	private Date date;
-	private Set<String> characters = new HashSet<>();
-	private Set<String> events = new HashSet<>();
-	private Set<String> relics = new HashSet<>();
+	private final Date date;
+	private final Set<String> characters = new HashSet<>();
+	private final Set<String> events = new HashSet<>();
+	private final Set<String> relics = new HashSet<>();
 
 	public Festival(
-		String name,
-		Date date,
-		String source
+		final String name,
+		final Date date,
+		final String source
 	) {
 		super(name, source);
 		this.date = date;

@@ -8,7 +8,7 @@ import java.util.Set;
 import database.Database;
 
 public class Manager {
-	private Database result = new Database();
+	private final Database result = new Database();
 
 	public Manager(Page rootPage) {
 		Set<Page> parsed = new HashSet<>();

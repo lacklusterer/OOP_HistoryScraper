@@ -1,14 +1,14 @@
 package entity;
 
 public class Reign extends Entity {
-	private Integer begin;
-	private Integer end;
+	private final Integer begin;
+	private final Integer end;
 
 	public Reign(
-		String name,
-		Integer begin,
-		Integer end,
-		String source
+		final String name,
+		final Integer begin,
+		final Integer end,
+		final String source
 	) {
 		super(name, source);
 		this.begin = begin;

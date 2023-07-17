@@ -1,14 +1,14 @@
 package entity;
 
 public class Relic extends Entity {
-	private String location;
-	private Integer found;
+	private final String location;
+	private final Integer found;
 
 	public Relic(
-		String name,
-		String location,
-		Integer found,
-		String source
+		final String name,
+		final String location,
+		final Integer found,
+		final String source
 	) {
 		super(name, source);
 		this.location = location;

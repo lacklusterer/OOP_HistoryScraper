@@ -4,24 +4,25 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Character extends Entity {
-	private Set<String> aliases = new HashSet<>();
-	private String father;
-	private Set<String> children = new HashSet<>();
-	private Integer crowned;
-	private Integer birth;
-	private Integer death;
+	private final Set<String> aliases = new HashSet<>();
+	private final String father;
+	private final Set<String> children = new HashSet<>();
+	private final Integer crowned;
+	private final Integer birth;
+	private final Integer death;
 
 	public Character(
-		String name,
-		String father,
-		Integer crowned,
-		Integer birth,
-		Integer death,
-		String source
+		final String name,
+		final String father,
+		final Integer crowned,
+		final Integer birth,
+		final Integer death,
+		final String source
 	) {
 		super(name, source);
 		this.father = father;
 		this.crowned = crowned;
+		this.birth = birth;
 		this.death = death;
 	}
 

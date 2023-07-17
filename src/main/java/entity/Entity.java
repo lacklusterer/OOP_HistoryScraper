@@ -7,10 +7,10 @@ import java.util.Objects;
  * Contains a name, and equals() will be check through this field.
  */
 public abstract class Entity {
-	private String name;
-	private String source;
+	private final String name;
+	private final String source;
 
-	protected Entity(String name, String source) {
+	protected Entity(final String name, final String source) {
 		this.name = name;
 		this.source = source;
 	}

@@ -10,11 +10,11 @@ import entity.Reign;
 import entity.Relic;
 
 public class Database {
-	Set<Character> characters = new HashSet<>();
-	Set<Event> events = new HashSet<>();
-	Set<Festival> festivals = new HashSet<>();
-	Set<Reign> reigns = new HashSet<>();
-	Set<Relic> relics = new HashSet<>();
+	private final Set<Character> characters = new HashSet<>();
+	private final Set<Event> events = new HashSet<>();
+	private final Set<Festival> festivals = new HashSet<>();
+	private final Set<Reign> reigns = new HashSet<>();
+	private final Set<Relic> relics = new HashSet<>();
 
 	public Set<Character> getCharacters() { return characters; }
 	public Set<Event> getEvents() { return events; }

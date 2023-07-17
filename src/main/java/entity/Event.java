@@ -1,12 +1,12 @@
 package entity;
 
 public class Event extends Entity {
-	private Integer year;
+	private final Integer year;
 
 	public Event(
-		String name,
-		Integer year,
-		String source
+		final String name,
+		final Integer year,
+		final String source
 	) {
 		super(name, source);
 		this.year = year;
