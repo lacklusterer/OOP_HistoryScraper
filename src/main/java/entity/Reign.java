@@ -1,20 +1,18 @@
 package entity;
 
+import entity.type.YearRange;
+
 public class Reign extends Entity {
-	private final Integer begin;
-	private final Integer end;
+	private final YearRange exist;
 
 	public Reign(
 		final String name,
-		final Integer begin,
-		final Integer end,
+		final YearRange exist,
 		final String source
 	) {
 		super(name, source);
-		this.begin = begin;
-		this.end = end;
+		this.exist = exist;
 	}
 
-	public Integer getBegin() { return begin; }
-	public Integer getEnd() { return end; }
+	public YearRange getExist() { return exist; }
 }
