@@ -21,4 +21,12 @@ public class Database {
 	public Set<Festival> getFestivals() { return festivals; }
 	public Set<Reign> getReigns() { return reigns; }
 	public Set<Relic> getRelics() { return relics; }
+
+	public void merge(Database other) {
+		characters.addAll(other.characters);
+		events.addAll(other.events);
+		festivals.addAll(other.festivals);
+		reigns.addAll(other.reigns);
+		relics.addAll(other.relics);
+	}
 }
