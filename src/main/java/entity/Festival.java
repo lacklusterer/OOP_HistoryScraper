@@ -13,7 +13,6 @@ public class Festival extends Entity {
 
 	public Festival(
 		String name,
-		String location,
 		Date date,
 		String source
 	) {
