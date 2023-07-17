@@ -16,7 +16,7 @@ import database.Database;
 
 public abstract class Page {
 	private String url;
-	private Document document;
+	protected Document document;
 
 	public Page(String url) {
 		this.url = url;
@@ -66,8 +66,6 @@ public abstract class Page {
 	}
 
 	public boolean isLoaded() { return document != null; }
-	public String getUrl() { return url; }
-	public Document getDocument() { return document; }
 
 	public Database getResult() { return null; }
 	public Collection<Page> getForks() { return List.of(); }
