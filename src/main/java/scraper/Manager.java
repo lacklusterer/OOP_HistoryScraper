@@ -17,6 +17,7 @@ public class Manager {
 
 		while (pages.size() > 0) {
 			var page = pages.remove();
+			page.load();
 			if (!parsed.contains(page)) {
 				parsed.add(page);
 			} else continue;
