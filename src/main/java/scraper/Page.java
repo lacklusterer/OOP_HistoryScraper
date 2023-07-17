@@ -1,5 +1,6 @@
 package scraper;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
@@ -15,6 +16,15 @@ public abstract class Page {
 		this.url = url;
 	}
 
+	public void load() {
+		// Try to download page
+		try {
+			document = Jsoup.connect(url).get();
+		}
+		catch (IOException exception) {}
+	}
+
+	public boolean isLoaded() { return document != null; }
 	public String getUrl() { return url; }
 	public Document getDocument() { return document; }
 
