@@ -20,6 +20,8 @@ public class Manager {
 			if (!parsed.contains(page)) {
 				parsed.add(page);
 			} else continue;
+			if (!page.isLoaded()) continue;
+
 			result.merge(page.getResult());
 			pages.addAll(page.getForks());
 		}
