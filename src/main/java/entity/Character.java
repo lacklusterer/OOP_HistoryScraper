@@ -25,9 +25,6 @@ public class Character extends Entity {
 		this.death = death;
 	}
 
-	public void addChild(String child) { children.add(child); }
-	public void addAlias(String alias) { aliases.add(alias); }
-
 	public Set<String> getAliases() { return aliases; }
 	public String getFather() { return father; }
 	public Set<String> getChildren() { return children; }
