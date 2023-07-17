@@ -102,7 +102,7 @@ public class KingsPage extends Base {
 				// Iterate through each cell of the row.
 				for (int index = 0; index < columns.size(); ++index) {
 					var value = withoutRefs(cells.get(index));
-					if (value == "không có" || value == "không rõ") continue;
+					if (value.equals("không có") || value.equals("không rõ")) continue;
 					switch (columns.get(index)) {
 					case "Vua":
 					case "Chúa":
