@@ -14,33 +14,9 @@ public class NKSCharCrawler extends BaseCrawler {
     Set<String> existingItems = new HashSet<>();
 
     @Override
-    protected void process(Document document, String saveFile) throws IOException {
-        String filePath = "out/nks/" + saveFile;
+    protected String process(Document document, String saveFile, File file) {
 
-        // keep track of existing data
-        File file = new File(filePath);
-        if (file.exists()) {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
-            String line;
-            // skip header
-            reader.readLine();
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",");
-                // add title to existing items
-                existingItems.add(parts[0]);
-            }
-            reader.close();
-        }
-
-        // FileWriter and BufferedWriter
-        FileWriter fileWriter = new FileWriter(filePath, true);
-        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-
-        // write CSV header if file empty
-        if (file.length() == 0) {
-            bufferedWriter.write("Name,Info,URL");
-            bufferedWriter.newLine();
-        }
+        StringBuilder stringBuilder = new StringBuilder();
 
         // get blog__items
         Elements blogItems = document.select("div.com-content-category-blog__item");
@@ -78,14 +54,15 @@ public class NKSCharCrawler extends BaseCrawler {
             System.out.println("URL: " + itemUrl);
 
             // write data to the CSV file
-            bufferedWriter.write("\"" + title + "\",\"" + info + "\",\"" + itemUrl + "\"");
-            bufferedWriter.newLine();
+            String result = "\"" + title + "\",\"" + info + "\",\"" + itemUrl + "\"";
+
+            stringBuilder.append(result).append("\n");
 
             System.out.println("Data for " + title + " saved successfully.\n");
         }
 
-        bufferedWriter.close();
-        fileWriter.close();
         System.out.println("Collected data: " + getCollectedCount() + "\n");
+
+        return stringBuilder.toString();
     }
 }
