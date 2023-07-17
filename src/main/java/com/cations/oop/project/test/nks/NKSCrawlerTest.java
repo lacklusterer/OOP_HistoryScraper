@@ -7,8 +7,7 @@ public class NKSCrawlerTest {
         NKSCharCrawler crawler = new NKSCharCrawler();
         int collected = 0;
         while (collected <= 10) {
-            // crawler.crawl("https://nguoikesu.com/nhan-vat?start=" + collected, "nhanvat.csv");
-            crawler.crawl("https://nguoikesu.com/di-tich-lich-su?start=" + collected, "ditich.csv");
+            crawler.crawl("https://nguoikesu.com/nhan-vat?start=" + collected, "nhanvat.csv");
             collected += 10;
         }
     }

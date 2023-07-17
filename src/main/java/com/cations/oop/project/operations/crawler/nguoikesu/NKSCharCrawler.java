@@ -15,9 +15,6 @@ public class NKSCharCrawler extends BaseCrawler {
 
     @Override
     protected void process(Document document, String saveFile) throws IOException {
-        // get blog__items
-        Elements blogItems = document.select("div.com-content-category-blog__item");
-
         String filePath = "out/nks/" + saveFile;
 
         // keep track of existing data
@@ -45,6 +42,9 @@ public class NKSCharCrawler extends BaseCrawler {
             bufferedWriter.newLine();
         }
 
+        // get blog__items
+        Elements blogItems = document.select("div.com-content-category-blog__item");
+
         // iterate over blogItems and extract data for each blogItem
         for (Element blogItem : blogItems) {
             Element titleElement = blogItem.selectFirst("h2 a");
@@ -57,6 +57,8 @@ public class NKSCharCrawler extends BaseCrawler {
             if (existingItems.contains("\"" + title + "\"")) {
                 System.out.println(title + " already exists!\n");
                 continue;
+            } else {
+                existingItems.add("\"" + title + "\"");
             }
 
             // extract info
@@ -79,22 +81,11 @@ public class NKSCharCrawler extends BaseCrawler {
             bufferedWriter.write("\"" + title + "\",\"" + info + "\",\"" + itemUrl + "\"");
             bufferedWriter.newLine();
 
-            System.out.println("Data for " + title + " saved successfully.\n" );
-        }
-
-        // add the item's title to the existingItems Set
-        for (Element blogItem : blogItems) {
-            Element titleElement = blogItem.selectFirst("h2 a");
-            String title = titleElement.text();
-            existingItems.add("\"" + title + "\"");
+            System.out.println("Data for " + title + " saved successfully.\n");
         }
 
         bufferedWriter.close();
         fileWriter.close();
         System.out.println("Collected data: " + getCollectedCount() + "\n");
-    }
-
-    public int getCollectedCount() {
-        return existingItems.size();
     }
 }
