@@ -29,4 +29,12 @@ public class Database {
 		reigns.addAll(other.reigns);
 		relics.addAll(other.relics);
 	}
+
+	public static Database read(String fileName) {
+		// TODO
+		return null;
+	}
+	public void write(String fileName) {
+		// TODO
+	}
 }
