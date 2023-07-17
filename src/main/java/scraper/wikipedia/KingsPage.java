@@ -119,7 +119,14 @@ public class KingsPage extends Base {
 					case "Tên húy":
 					case "Tôn hiệu":
 					case "Tôn hiệu hoặc Thụy hiệu":
-						aliases.add(value);
+						for (var commaPart: value.split(", ")) {
+							boolean endPrth = commaPart.charAt(commaPart.length() - 1) == ')';
+							for (var prthPart: commaPart.split("\\) ")) {
+								if (endPrth && prthPart.charAt(prthPart.length() - 1) != ')')
+									prthPart += ')';
+								aliases.add(prthPart);
+							}
+						}
 						break;
 					case "Trị vì":
 						// Check if the reign title cell spans 3 columns.
