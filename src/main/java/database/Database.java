@@ -23,6 +23,8 @@ public class Database {
 	public Set<Relic> getRelics() { return relics; }
 
 	public void merge(Database other) {
+		if (other == null) return;
+
 		characters.addAll(other.characters);
 		events.addAll(other.events);
 		festivals.addAll(other.festivals);
