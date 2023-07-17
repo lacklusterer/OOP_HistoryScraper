@@ -7,13 +7,14 @@ import java.io.IOException;
 import java.net.SocketTimeoutException;
 
 public abstract class BaseCrawler {
-    public void crawl(String url) {
+    public void crawl(String url, String saveFile) {
         while (true) {
             try {
                 System.out.println("Connecting...");
                 Document document = Jsoup.connect(url).get();
                 System.out.println("Connected to \"" + url + "\"!\n");
-                process(document);
+
+                process(document, saveFile);
                 return; // breaks look if successfully connects
             } catch (SocketTimeoutException e) {
                 System.err.println("Connection timed out while connecting to \"" + url + "\"! Retrying...");
@@ -23,5 +24,5 @@ public abstract class BaseCrawler {
             }
         }
     }
-    protected abstract void process(Document document) throws IOException;
+    protected abstract void process(Document document, String saveFile) throws IOException;
 }

@@ -14,11 +14,11 @@ public class NKSCharCrawler extends BaseCrawler {
     Set<String> existingItems = new HashSet<>();
 
     @Override
-    protected void process(Document document) throws IOException {
+    protected void process(Document document, String saveFile) throws IOException {
         // get blog__items
         Elements blogItems = document.select("div.com-content-category-blog__item");
 
-        String filePath = "out/nks/test.csv";
+        String filePath = "out/nks/" + saveFile;
 
         // keep track of existing data
         File file = new File(filePath);
