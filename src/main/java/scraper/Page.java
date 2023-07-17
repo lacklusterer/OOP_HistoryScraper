@@ -16,7 +16,7 @@ import org.jsoup.nodes.Document;
 import database.Database;
 
 public abstract class Page {
-	private String url;
+	protected final String url;
 	protected Document document;
 
 	public Page(String url) {
