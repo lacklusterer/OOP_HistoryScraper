@@ -2,9 +2,8 @@ package scraper.wikipedia;
 
 import database.Database;
 import entity.Character;
-import scraper.Page;
 
-public class KingPage extends Page {
+public class KingPage extends Base {
 	/**
 	 * Contains infomation parsed from the parent page.
 	 */

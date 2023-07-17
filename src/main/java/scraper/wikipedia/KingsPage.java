@@ -18,7 +18,7 @@ import entity.Reign;
 import entity.type.YearRange;
 import scraper.Page;
 
-public class KingsPage extends Page {
+public class KingsPage extends Base {
 	public KingsPage() { super("https://vi.wikipedia.org/wiki/Vua_Vi%E1%BB%87t_Nam"); }
 
 	/**
@@ -110,7 +110,7 @@ public class KingsPage extends Page {
 					case "Thủ lĩnh":
 					case "Tước hiệu":
 					case "Tiết độ sứ":
-						forkUrl = cells.get(index).selectFirst("a").attr("href");
+						forkUrl = baseUrl + cells.get(index).selectFirst("a").attr("href");
 						name = value;
 						break;
 					case "Miếu hiệu":
