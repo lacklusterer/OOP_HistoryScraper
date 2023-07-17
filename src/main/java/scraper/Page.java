@@ -8,6 +8,7 @@ import java.net.URL;
 import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -74,5 +75,10 @@ public abstract class Page {
 	public boolean equals(Object other) {
 		var otherPage = (Page)other;
 		return url.equals(otherPage.url);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(url);
 	}
 }
