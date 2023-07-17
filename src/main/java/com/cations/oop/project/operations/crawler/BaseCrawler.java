@@ -25,8 +25,7 @@ public abstract class BaseCrawler {
                 Document document = Jsoup.connect(url).get();
                 System.out.println("Connected to \"" + url + "\"!\n");
 
-//                process(document, saveFile);
-                operate(document, saveFile);
+                operate(document, saveFile, existingItems);
 
                 return; // breaks look if successfully connects
             } catch (SocketTimeoutException e) {
@@ -37,13 +36,13 @@ public abstract class BaseCrawler {
             }
         }
     }
-    protected abstract String process(Document document, String saveFile, File file) throws IOException;
+    protected abstract String process(Document document, Set<String> existingItems) throws IOException;
 
     public int getCollectedCount() {
         return existingItems.size();
     }
 
-    protected void operate(Document document, String saveFile) throws IOException {
+    protected void operate(Document document, String saveFile, Set<String> existingItems) throws IOException {
         // keep track of existing data
         String filePath = "out/nks/" + saveFile;
         File file = new File(filePath);
@@ -70,10 +69,9 @@ public abstract class BaseCrawler {
             bufferedWriter.newLine();
         }
 
-        String result = process(document, saveFile, file);
+        String result = process(document, existingItems);
 
         bufferedWriter.write(result);
-        bufferedWriter.newLine();
 
         bufferedWriter.close();
         fileWriter.close();

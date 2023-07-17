@@ -10,11 +10,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class NKSCharCrawler extends BaseCrawler {
-    // create a HashSet to keep track of data
-    Set<String> existingItems = new HashSet<>();
 
     @Override
-    protected String process(Document document, String saveFile, File file) {
+    protected String process(Document document, Set<String> existingItems) {
 
         StringBuilder stringBuilder = new StringBuilder();
 
