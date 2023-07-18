@@ -20,7 +20,8 @@ public class HomePage extends Base {
 		assert(navButtons.size() == 9); // 9 buttons
 
 		// Crawl on specific nav buttons.
-		// TODO
+		var url = baseUrl + navButtons.get(4).selectFirst("a").attr("href");
+		forks.add(new ListingPage(url, RelicPage.class, "li.list-group-item"));
 
 		return forks;
 	}
