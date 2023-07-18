@@ -48,7 +48,7 @@ public abstract class Page {
 				.get(
 					"/run/user/1000/oop_project",
 					parsedUrl.getHost(),
-					parsedUrl.getPath())
+					parsedUrl.getFile())
 				.toString() + ".html";
 		}
 		catch (MalformedURLException exception) {}
