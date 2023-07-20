@@ -164,7 +164,7 @@ public class KingsPage extends Base {
 				// We are certain that each of the field was parsed from the table.
 				assert(forkUrl != null);
 				assert(name != null);
-				var preParsed = new Character(name, null, null, crowned, null);
+				var preParsed = new Character(name, null, null, crowned, getUrl());
 				preParsed.getAliases().addAll(aliases);
 
 				// Create the fork page
