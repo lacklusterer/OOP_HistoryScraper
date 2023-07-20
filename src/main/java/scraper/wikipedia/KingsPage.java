@@ -19,7 +19,7 @@ import entity.type.YearRange;
 import scraper.Page;
 
 public class KingsPage extends Base {
-	public KingsPage() { super("https://vi.wikipedia.org/wiki/Vua_Vi%E1%BB%87t_Nam"); }
+	public KingsPage() { super("/wiki/Vua_Vi%E1%BB%87t_Nam"); }
 
 	/**
 	 * This method only scraps <code>Reign</code>s.
@@ -55,7 +55,7 @@ public class KingsPage extends Base {
 			database.getReigns().add(new Reign(
 				header.text().replaceAll(" \\([^\\)]*\\)", ""),
 				YearRange.merge(ranges),
-				url
+				getUrl()
 			));
 		}
 		return database;
@@ -110,7 +110,7 @@ public class KingsPage extends Base {
 					case "Thủ lĩnh":
 					case "Tước hiệu":
 					case "Tiết độ sứ":
-						forkUrl = baseUrl + cells.get(index).selectFirst("a").attr("href");
+						forkUrl = cells.get(index).selectFirst("a").attr("href");
 						name = value;
 						break;
 					case "Miếu hiệu":
@@ -164,7 +164,7 @@ public class KingsPage extends Base {
 				// We are certain that each of the field was parsed from the table.
 				assert(forkUrl != null);
 				assert(name != null);
-				var preParsed = new Character(name, null, null, crowned, url);
+				var preParsed = new Character(name, null, null, crowned, null);
 				preParsed.getAliases().addAll(aliases);
 
 				// Create the fork page

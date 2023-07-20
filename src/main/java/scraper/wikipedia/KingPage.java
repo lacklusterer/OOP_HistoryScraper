@@ -18,8 +18,8 @@ public class KingPage extends Base {
 	 */
 	private Character preParsed;
 
-	public KingPage(String url, Character preParsed) {
-		super(url);
+	public KingPage(String path, Character preParsed) {
+		super(path);
 		this.preParsed = preParsed;
 	}
 
@@ -139,7 +139,7 @@ public class KingPage extends Base {
 			father,
 			new YearRange(born, died),
 			preParsed.getCrowned(),
-			url
+			getUrl()
 		);
 		character.getAliases().addAll(preParsed.getAliases());
 		character.getChildren().addAll(children);
