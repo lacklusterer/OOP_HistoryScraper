@@ -13,11 +13,11 @@ public class ListingPage extends Base {
 	private String subPageSelector;
 
 	public ListingPage(
-		String url,
+		String path,
 		Class<? extends Page> subPageClass,
 		String subPageSelector
 	) {
-		super(url);
+		super(path);
 		this.subPageClass = subPageClass;
 		this.subPageSelector = subPageSelector;
 	}
@@ -30,7 +30,7 @@ public class ListingPage extends Base {
 		Element nextButton = document.selectFirst("a.page-link[aria-label=\"Đi tới tiếp tục trang\"]");
 		if (nextButton != null) {
 			forks.add(new ListingPage(
-				baseUrl + nextButton.attr("href"),
+				nextButton.attr("href"),
 				subPageClass,
 				subPageSelector
 			));
@@ -42,7 +42,7 @@ public class ListingPage extends Base {
 			try {
 				forks.add(subPageClass
 					.getDeclaredConstructor(String.class)
-					.newInstance(baseUrl + link.attr("href"))
+					.newInstance(link.attr("href"))
 				);
 			}
 			catch (Exception exc) {

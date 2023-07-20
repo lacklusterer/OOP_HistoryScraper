@@ -10,7 +10,7 @@ import org.jsoup.select.Elements;
 import scraper.Page;
 
 public class HomePage extends Base {
-	public HomePage() { super(baseUrl); }
+	public HomePage() { super(); }
 
 	@Override
 	public Collection<Page> getForks() {
@@ -22,23 +22,23 @@ public class HomePage extends Base {
 
 		// Crawl on specific nav buttons.
 		forks.add(new ListingPage(
-			baseUrl + navButtons.get(2).select("a").get(1).attr("href"),
+			navButtons.get(2).select("a").get(1).attr("href"),
 			MilitaryEventPage.class, "div[itemprop=\"blogPost\"]"));
 		forks.add(new ListingPage(
-			baseUrl + navButtons.get(2).select("a").get(2).attr("href"),
+			navButtons.get(2).select("a").get(2).attr("href"),
 			LiteratureEventPage.class, "div[itemprop=\"blogPost\"]"));
 		forks.add(new ListingPage(
-			baseUrl + navButtons.get(3).selectFirst("a").attr("href"),
+			navButtons.get(3).selectFirst("a").attr("href"),
 			CharacterPage.class, "div[itemprop=\"blogPost\"]"));
 		forks.add(new ListingPage(
-			baseUrl + navButtons.get(4).selectFirst("a").attr("href"),
+			navButtons.get(4).selectFirst("a").attr("href"),
 			RelicPage.class, "li.list-group-item"));
 
 		// Crawl on eras on the side bar.
 		// The subpages on the listing page for eras contains inconsistent types
 		// (both Character and Event).
 		for (Element reignButton: document.select("#Mod88 ul.mod-articlescategories li"))
-			forks.add(new ReignPage(baseUrl + reignButton.selectFirst("a").attr("href")));
+			forks.add(new ReignPage(reignButton.selectFirst("a").attr("href")));
 
 		return forks;
 	}
