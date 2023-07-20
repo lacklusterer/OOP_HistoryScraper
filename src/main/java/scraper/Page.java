@@ -40,6 +40,12 @@ public abstract class Page {
 	}
 
 	/**
+	 * This is used for the home (root) page of the domain.
+	 * @param baseUrl The domain of the website.
+	 */
+	public Page(String baseUrl) { this(baseUrl, ""); }
+
+	/**
 	 * Attempts to Load the target URL into the <code>document</code> variable in
 	 * the order:
 	 * <ol>
