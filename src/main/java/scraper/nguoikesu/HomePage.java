@@ -27,6 +27,9 @@ public class HomePage extends Base {
 			baseUrl + navButtons.get(2).select("a").get(2).attr("href"),
 			LiteratureEventPage.class, "div[itemprop=\"blogPost\"]"));
 		forks.add(new ListingPage(
+			baseUrl + navButtons.get(3).selectFirst("a").attr("href"),
+			CharacterPage.class, "div[itemprop=\"blogPost\"]"));
+		forks.add(new ListingPage(
 			baseUrl + navButtons.get(4).selectFirst("a").attr("href"),
 			RelicPage.class, "li.list-group-item"));
 
