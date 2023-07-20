@@ -45,6 +45,8 @@ public abstract class Page {
 	 */
 	public Page(String baseUrl) { this(baseUrl, ""); }
 
+	protected String getUrl() { return baseUrl + path; }
+
 	/**
 	 * Attempts to Load the target URL into the <code>document</code> variable in
 	 * the order:
@@ -54,12 +56,12 @@ public abstract class Page {
 	 * 	<li>Write the cache to a file on the disk.</li>
 	 */
 	public void load() {
+		var url = getUrl();
+
 		// Get cache file path
-		String baseUrl = null;
 		String cachePath = null;
 		try {
 			URL parsedUrl = new URL(url);
-			baseUrl = parsedUrl.getProtocol() + "://" + parsedUrl.getHost();
 			cachePath = Paths
 				.get(
 					"/run/user/1000/oop_project",
@@ -122,11 +124,11 @@ public abstract class Page {
 	@Override
 	public boolean equals(Object other) {
 		var otherPage = (Page)other;
-		return url.equals(otherPage.url);
+		return baseUrl.equals(otherPage.baseUrl) && path.equals(otherPage.path);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hashCode(url);
+		return Objects.hashCode(getUrl());
 	}
 }
