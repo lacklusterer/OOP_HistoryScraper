@@ -8,3 +8,7 @@
 /.settings/
 /.classpath
 /.project
+
+# Project-specific
+/.cache
+/database.json
