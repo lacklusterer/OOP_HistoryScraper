@@ -20,8 +20,15 @@ public class HomePage extends Base {
 		assert(navButtons.size() == 9); // 9 buttons
 
 		// Crawl on specific nav buttons.
-		var url = baseUrl + navButtons.get(4).selectFirst("a").attr("href");
-		forks.add(new ListingPage(url, RelicPage.class, "li.list-group-item"));
+		forks.add(new ListingPage(
+			baseUrl + navButtons.get(2).select("a").get(1).attr("href"),
+			MilitaryEventPage.class, "div[itemprop=\"blogPost\"]"));
+		forks.add(new ListingPage(
+			baseUrl + navButtons.get(2).select("a").get(2).attr("href"),
+			LiteratureEventPage.class, "div[itemprop=\"blogPost\"]"));
+		forks.add(new ListingPage(
+			baseUrl + navButtons.get(4).selectFirst("a").attr("href"),
+			RelicPage.class, "li.list-group-item"));
 
 		return forks;
 	}
