@@ -16,17 +16,27 @@ import org.jsoup.nodes.Document;
 import database.Database;
 
 /**
- * The webpage scraper/crawler.
+ * The webpage scraper/crawler. <br>
+ * We assume that during the crawling process, the links only contain the path
+ * to another endpoint of the domain (for example: <code>"/nhan-vat/tran-van-a"
+ * </code>).
  */
 public abstract class Page {
-	protected final String url;
+	private final String baseUrl;
+	/**
+	 * The path can contain query string (such as <code>"/some/path?param=value"
+	 * </code>).
+	 */
+	private final String path;
 	protected Document document;
 
 	/**
-	 * @param url The URL of the webpage to downloaded.
+	 * @param baseUrl The domain of the website.
+	 * @param path The path to a page of the domain.
 	 */
-	public Page(String url) {
-		this.url = url;
+	public Page(String baseUrl, String path) {
+		this.baseUrl = baseUrl;
+		this.path = path;
 	}
 
 	/**
