@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import scraper.Page;
@@ -32,6 +33,12 @@ public class HomePage extends Base {
 		forks.add(new ListingPage(
 			baseUrl + navButtons.get(4).selectFirst("a").attr("href"),
 			RelicPage.class, "li.list-group-item"));
+
+		// Crawl on eras on the side bar.
+		// The subpages on the listing page for eras contains inconsistent types
+		// (both Character and Event).
+		for (Element reignButton: document.select("#Mod88 ul.mod-articlescategories li"))
+			forks.add(new ReignPage(baseUrl + reignButton.selectFirst("a").attr("href")));
 
 		return forks;
 	}
