@@ -3,8 +3,6 @@ package scraper;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.List;
@@ -59,17 +57,12 @@ public abstract class Page {
 		var url = getUrl();
 
 		// Get cache file path
-		String cachePath = null;
-		try {
-			URL parsedUrl = new URL(url);
-			cachePath = Paths
-				.get(
-					"/run/user/1000/oop_project",
-					parsedUrl.getHost(),
-					parsedUrl.getFile())
-				.toString() + ".html";
-		}
-		catch (MalformedURLException exception) {}
+		String cachePath = Paths
+			.get(
+				"/run/user/1000/oop_project",
+				baseUrl.split("/")[2],
+				path)
+			.toString() + ".html";
 
 		// Attemp to read from cache if it exists
 		File cache = new File(cachePath);
