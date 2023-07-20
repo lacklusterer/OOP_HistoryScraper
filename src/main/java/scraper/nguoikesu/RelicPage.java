@@ -1,7 +1,5 @@
 package scraper.nguoikesu;
 
-import scraper.Page;
-
-public class RelicPage extends Page {
+public class RelicPage extends Base {
 	public RelicPage(String url) { super(url); }
 }
