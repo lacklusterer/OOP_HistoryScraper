@@ -20,6 +20,7 @@ import database.Database;
  * </code>).
  */
 public abstract class Page {
+	private static String cacheDir = ".cache";
 	private final String baseUrl;
 	/**
 	 * The path can contain query string (such as <code>"/some/path?param=value"
@@ -27,6 +28,8 @@ public abstract class Page {
 	 */
 	private final String path;
 	protected Document document;
+
+	public static void setCacheDir(String cacheDir) { Page.cacheDir = cacheDir; }
 
 	/**
 	 * @param baseUrl The domain of the website.
@@ -59,7 +62,7 @@ public abstract class Page {
 		// Get cache file path
 		String cachePath = Paths
 			.get(
-				"/run/user/1000/oop_project",
+				Page.cacheDir,
 				baseUrl.split("/")[2],
 				path)
 			.toString() + ".html";
