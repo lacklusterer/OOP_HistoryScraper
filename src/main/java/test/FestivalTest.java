@@ -7,6 +7,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,28 +18,29 @@ public class FestivalTest {
 		Document document = Jsoup.connect(url).get();
 
 		boolean firstTableProcessed = false; // Flag to check if the first table is processed
+		Pattern p = Pattern.compile("(\\d+) tháng (\\d+)");
 
 		Elements tables = document.select("table.wikitable > tbody");
-
-		Pattern p = Pattern.compile("(\\d+) tháng (\\d+)");
 
 		for (var table : tables) {
 			Elements rows = table.select("tr");
 
 			// Start from index 1 to skip the first row
 			for (int i = 1; i < rows.size(); i++) {
-				Element row = rows.get(i);
-				Elements columns = row.select("td");
+				Elements columns = rows.get(i).select("td");
+				Element column1 = columns.get(0);
+				Element column2 = columns.get(1);
 
-				String date = columns.get(0).text();
-				String festivalName = columns.get(1).text();
-
-				// Swap the values of because the first table is messed up
+				// Swap the values of the first table's columns because  it is messed up
 				if (!firstTableProcessed) {
-					String temp = date;
-					date = festivalName;
-					festivalName = temp;
+					Element temp = column1;
+					column1 = column2;
+					column2 = temp;
 				}
+
+				String date = column1.text();
+
+				String festivalName = column2.text();
 
 				// Deal with special months name
 				date = date.replace("Giêng", "1").replace("Chạp", "12");
