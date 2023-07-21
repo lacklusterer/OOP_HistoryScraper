@@ -18,6 +18,7 @@ public class App {
 			// Scrape pages & merge results into big database.
 			database.merge(new Manager(new scraper.nguoikesu.HomePage()).getResult());
 			database.merge(new Manager(new scraper.wikipedia.KingsPage()).getResult());
+			database.merge(new Manager(new scraper.wikipedia.FestivalsPage()).getResult());
 
 			// Write database to disk
 			database.write(databasePath);
