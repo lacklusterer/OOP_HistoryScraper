@@ -55,7 +55,7 @@ public class FestivalsPage extends Base {
 				if (m.find()) {
 					int day = Integer.parseInt(m.group(1));
 					int month = Integer.parseInt(m.group(2));
-					var festivalDate = new Date(month, day);
+					var festivalDate = new Date(month, day, (currentTable % 2 == 0));
 
 					for (var festivalName : festivalNames) {
 						Festival festival = new Festival(festivalName, festivalDate, getUrl());
