@@ -1,5 +1,8 @@
 package entity;
 
+/**
+ * Is actually "Di tích"
+ */
 public class Relic extends Entity {
 	private final String location;
 	private final Integer found;
