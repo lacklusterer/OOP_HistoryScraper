@@ -3,7 +3,6 @@ package scraper.wikipedia;
 import database.Database;
 import entity.Festival;
 import entity.type.Date;
-import scraper.Page;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -19,24 +18,24 @@ public class FestivalsPage extends Base {
 	@Override
 	public Database getResult() {
 		var database = new Database();
+		int currentTable = 0;
 		Elements tables = document.select("table.wikitable > tbody");
 
 		Pattern p = Pattern.compile("(\\d+) tháng (\\d+)");
 
-		boolean firstTableProcessed = false; // Flag to check if the first table is processed
-
 		for (var table : tables) {
+			currentTable++;
 			Elements rows = table.select("tr");
 
 			// Iterates through the rows, skip first one
 			for (int i = 1; i < rows.size(); i++) {
 				Elements columns = rows.get(i).select("td");
 
-				// Swap the values of the first table's columns because it is messed up
 				Element column1 = columns.get(0);
 				Element column2 = columns.get(1);
 
-				if (!firstTableProcessed) {
+				// Swap the values of the first table's columns because it is messed up
+				if (currentTable == 1) {
 					Element temp = column1;
 					column1 = column2;
 					column2 = temp;
@@ -63,11 +62,6 @@ public class FestivalsPage extends Base {
 						database.getFestivals().add(festival);
 					}
 				}
-			}
-
-			// Set the flag to true after processing the first table
-			if (!firstTableProcessed) {
-				firstTableProcessed = true;
 			}
 		}
 		return database;
