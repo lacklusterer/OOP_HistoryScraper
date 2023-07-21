@@ -1,5 +1,6 @@
 package test;
 
+import entity.Festival;
 import entity.type.Date;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -8,6 +9,7 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,12 +22,12 @@ public class FestivalTest {
 		boolean firstTableProcessed = false; // Flag to check if the first table is processed
 		Pattern p = Pattern.compile("(\\d+) tháng (\\d+)");
 
-		Elements tables = document.select("table.wikitable > tbody");
+		Elements tables = document.select("table.wikitable");
 
 		for (var table : tables) {
-			Elements rows = table.select("tr");
+			Elements rows = table.select("tbody > tr");
 
-			// Start from index 1 to skip the first row
+			// Iterates through the rows, skip first one
 			for (int i = 1; i < rows.size(); i++) {
 				Elements columns = rows.get(i).select("td");
 				Element column1 = columns.get(0);
@@ -40,12 +42,15 @@ public class FestivalTest {
 
 				String date = column1.text();
 
-				String festivalName = column2.text();
+				List<String> festivalNames = new ArrayList<>();
+				for (var line : column2.html().split("<br>| / ")) {
+					festivalNames.add(Jsoup.parse(line).text().replaceAll("\\[\\d+\\]", ""));
+				}
 
 				// Deal with special months name
 				date = date.replace("Giêng", "1").replace("Chạp", "12");
 
-				process(date, festivalName, p);
+				process(date, p, festivalNames);
 			}
 
 			if (!firstTableProcessed) {
@@ -54,16 +59,20 @@ public class FestivalTest {
 		}
 	}
 
-	public static void process(String date, String festivalName, Pattern p) {
-		String combined = (date + "|" + festivalName);
-		System.out.println("Combined: " + combined);
-		Matcher m = p.matcher(date);
+	public static void process(String date, Pattern p, List<String> festivalNames) {
+		System.out.println(date + "\n" + festivalNames);
 
-		while (m.find()) {
+		Matcher m = p.matcher(date);
+		if (m.find()) {
 			int day = Integer.parseInt(m.group(1));
 			int month = Integer.parseInt(m.group(2));
-			var dDate = new Date(month, day);
-			System.out.println(dDate.getDay() + "|" + dDate.getMonth());
+			var festivalDate = new Date(month, day);
+
+			for (var festivalName : festivalNames) {
+				Festival festival = new Festival(festivalName, festivalDate, "My ass");
+				System.out.println("Name: " + festival.getName());
+				System.out.println("Date: " + festival.getDate().getDay() + "-" + festival.getDate().getMonth());
+			}
 		}
 	}
 }
