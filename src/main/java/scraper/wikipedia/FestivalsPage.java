@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class FestivalsPage extends Base{
+public class FestivalsPage extends Base {
 	public FestivalsPage() { super("/wiki/C%C3%A1c_ng%C3%A0y_l%E1%BB%85_%E1%BB%9F_Vi%E1%BB%87t_Nam"); }
 
 	@Override
