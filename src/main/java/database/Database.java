@@ -67,6 +67,22 @@ public class Database {
 		catch (IOException exc) { return; }
 	}
 
+	/**
+	 * From: https://www.baeldung.com/java-remove-accents-from-text
+	 */
+	private static List<String> getWords(String input) {
+		return Arrays.asList(Normalizer
+			.normalize(input, Normalizer.Form.NFKD)
+			.replaceAll("\\p{M}", "")
+			.replaceAll("[\\(\\)\\-]+", "")
+			.toLowerCase()
+			.split(" ")
+		)
+			.stream()
+			.filter(s -> s.length() != 0)
+			.collect(Collectors.toList());
+	}
+
 	public void generateCache() {
 		wordCache.clear();
 	}
