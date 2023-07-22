@@ -74,7 +74,8 @@ public class Database {
 		return Arrays.asList(Normalizer
 			.normalize(input, Normalizer.Form.NFKD)
 			.replaceAll("\\p{M}", "")
-			.replaceAll("[\\(\\)\\-]+", "")
+			.replaceAll("[\\(\\)]+", "")
+			.replaceAll("[\\-–\\.,]+", " ")
 			.toLowerCase()
 			.split(" ")
 		)
