@@ -4,10 +4,10 @@
 
 Entity | Quantity |
 -------- |:--------:|
-Character |    1     |
-Festival |    1     |
-Reign |    1     |
-Historical Site |    1     |
+Character |   1617   |
+Event |    77    |
+Festival |    89    |
+Reign |    22    |
 
 ## 2. Data Property
 
@@ -41,7 +41,16 @@ Historical Site |    1     |
 
 # IV. Object-Oriented Programming Techniques
 
-## 1. 
+## 1. Abstraction
+
+## 2. Encapsulation
+
+## 3. Inheritance
+
+## 4. Polymorphism
+
+## 6. Overloading and Overriding: 
+Classes can have optional parameter. For example, `Date` has the attribute `moon` that tell if it's lunar date or not. Using overloaded constructor, we can create `Date` objects with different sets of input parameters for flexibility.
 
 # V. Technologies Utilized
 
