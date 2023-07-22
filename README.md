@@ -33,9 +33,9 @@ Historical Site |    1     |
 
 # III. Design Analysis
 
-![](UML/scrape_call.png)
-
 ![](UML/simpledb.png)
+
+![](UML/scrape_call.png)
 
 ![](UML/scraper.png)
 
