@@ -124,12 +124,23 @@ public class Database {
 	}
 
 	public Set<Entity> search(String query) {
+		boolean added = false;
 		Set<Entity> results = new HashSet<>();
 
-		for (var word: getWords(query))
+		for (var word: getWords(query)) {
+			// Get all entity for this word in the query
+			Set<Entity> thisWord = new HashSet<>();
 			for (var key: wordCache.keySet())
 				if (key.contains(word))
-					results.addAll(wordCache.get(key));
+					thisWord.addAll(wordCache.get(key));
+
+			// Perform set collision for each word
+			if (added) results.retainAll(thisWord);
+			else {
+				results.addAll(thisWord);
+				added = true;
+			}
+		}
 
 		return results;
 	}
