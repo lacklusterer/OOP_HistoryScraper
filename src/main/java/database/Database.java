@@ -100,6 +100,21 @@ public class Database {
 		for (var e: festivals) cacheEntity(e);
 		for (var e: reigns) cacheEntity(e);
 		for (var e: relics) cacheEntity(e);
+
+		// More info from character
+		for (var c: characters) {
+			List<String> extraWords = new ArrayList<>();
+			for (var alias: c.getAliases()) extraWords.addAll(getWords(alias));
+			if (c.getFather() != null) extraWords.addAll(getWords(c.getFather()));
+			for (var word: extraWords) cacheEntity(word, c);
+		}
+
+		// More on events
+		for (var e: events) {
+			List<String> extraWords = new ArrayList<>();
+			for (var c: e.getCharacters()) extraWords.addAll(getWords(c));
+			for (var word: extraWords) cacheEntity(word, e);
+		}
 	}
 
 	public Set<Entity> search(String name) {
