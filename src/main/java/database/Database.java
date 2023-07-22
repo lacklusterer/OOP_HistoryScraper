@@ -83,8 +83,23 @@ public class Database {
 			.collect(Collectors.toList());
 	}
 
+	private void cacheEntity(String word, Entity entity) {
+		if (!wordCache.containsKey(word))
+			wordCache.put(word, new HashSet<>());
+		wordCache.get(word).add(entity);
+	}
+	private void cacheEntity(Entity entity) {
+		for (var word: getWords(entity.getName())) cacheEntity(word, entity);
+	}
 	public void generateCache() {
 		wordCache.clear();
+
+		// Cache from names of entities
+		for (var e: characters) cacheEntity(e);
+		for (var e: events) cacheEntity(e);
+		for (var e: festivals) cacheEntity(e);
+		for (var e: reigns) cacheEntity(e);
+		for (var e: relics) cacheEntity(e);
 	}
 
 	public Set<Entity> search(String name) {
