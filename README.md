@@ -23,8 +23,13 @@ Historical Site |  |
 # II. Design Analysis
 
 ## 1. Package dependency diagram
-
+![package_dep](UML/package_dep.png)
 ## 2. Class dependency diagram
+### Wikipedia scraper
+![](UML/wikipedia.png)
+
+### nguoikesu scraper
+![](UML/nguoikesu.png)
 
 # III. Object-Oriented Programming Techniques
 
