@@ -7,10 +7,9 @@ import scraper.Manager;
 public class App {
 	public static void main(String[] argsArr) {
 		List<String> args = Arrays.asList(argsArr);
+		final var databasePath = "database.json";
 
 		if (args.size() == 0 || args.get(0).equals("scrape")) {
-			final var databasePath = "database.json";
-
 			// Create database instance.
 			var database = Database.read(databasePath);
 			if (database == null) database = new Database();
