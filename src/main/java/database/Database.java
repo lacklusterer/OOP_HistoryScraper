@@ -7,12 +7,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import com.google.gson.Gson;
 
 import entity.Character;
+import entity.Entity;
 import entity.Event;
 import entity.Festival;
 import entity.Reign;
@@ -24,6 +27,7 @@ import entity.Relic;
 public class Database {
 	private final static Gson gson = new Gson();
 
+	private transient final Map<String, Set<Entity>> wordCache = new HashMap<>();
 	private final Set<Character> characters = new HashSet<>();
 	private final Set<Event> events = new HashSet<>();
 	private final Set<Festival> festivals = new HashSet<>();
@@ -61,5 +65,13 @@ public class Database {
 			writer.close();
 		}
 		catch (IOException exc) { return; }
+	}
+
+	public void generateCache() {
+		wordCache.clear();
+	}
+
+	public Set<Entity> search(String name) {
+		return null;
 	}
 }
