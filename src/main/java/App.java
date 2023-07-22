@@ -1,6 +1,9 @@
 import java.util.Arrays;
 import java.util.List;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import database.Database;
 import scraper.Manager;
 
@@ -21,6 +24,36 @@ public class App {
 
 			// Write database to disk
 			database.write(databasePath);
+		}
+
+		if (args.get(0).equals("search")) {
+			// Generate query string
+			String query = String.join(" ", args.subList(1, args.size()));
+
+			// Create database instance.
+			var database = Database.read(databasePath);
+			if (database == null) {
+				System.err.println("Database does not exist!");
+				return;
+			}
+
+			// Generate cache for searching
+			database.generateCache();
+
+			// For pretty print
+			Gson gson = new GsonBuilder()
+				.setPrettyPrinting()
+				.serializeNulls()
+				.create();
+
+			// Search items
+			var results = database.search(query);
+			System.out.println("Found " + results.size() + " item(s):");
+			for (var entity: database.search(query)) {
+				System.out.println();
+				System.out.println(entity.getClass().getName());
+				System.out.println(gson.toJson(entity));
+			}
 		}
 	}
 }
