@@ -123,7 +123,14 @@ public class Database {
 		}
 	}
 
-	public Set<Entity> search(String name) {
-		return null;
+	public Set<Entity> search(String query) {
+		Set<Entity> results = new HashSet<>();
+
+		for (var word: getWords(query))
+			for (var key: wordCache.keySet())
+				if (key.contains(word))
+					results.addAll(wordCache.get(key));
+
+		return results;
 	}
 }
