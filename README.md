@@ -3,11 +3,11 @@
 ## 1. Quantity
 
 Entity | Quantity |
--------- | :--------: |
-Character | Cell |
-Festival | Cell |
-Reign |  |
-Historical Site |  |
+-------- |:--------:|
+Character |    1     |
+Festival |    1     |
+Reign |    1     |
+Historical Site |    1     |
 
 ## 2. Data Property
 
@@ -33,7 +33,11 @@ Historical Site |  |
 
 # III. Design Analysis
 
+![](UML/scrape_call.png)
 
+![](UML/simpledb.png)
+
+![](UML/scraper.png)
 
 # IV. Object-Oriented Programming Techniques
 
