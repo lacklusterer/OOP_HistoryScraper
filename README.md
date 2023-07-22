@@ -2,12 +2,12 @@
 
 ## 1. Quantity
 
-Entity | Quantity |
--------- |:--------:|
-Character |   1617   |
-Event |    77    |
-Festival |    89    |
-Reign |    22    |
+| Entity    | Quantity |
+|-----------|:--------:|
+| Character |   1617   |
+| Event     |    77    |
+| Festival  |    89    |
+| Reign     |    22    |
 
 ## 2. Data Property
 
@@ -48,6 +48,11 @@ Reign |    22    |
 ## 3. Inheritance
 
 ## 4. Polymorphism
+**Polymorphism** plays a crucial role in enhancing code *flexibility* and *reusability*. In our project, we used **polymorphism** to enable the `Manager` class to treat every `Page` object without concerning itself with the specific details of each `Page`'s functionality.
+
+By treating every `Page` object uniformly, the `Manager` class was able to interact with them using a common set of methods, independent of the specific details of each `Page`'s functionality. 
+
+This *decoupling* of the `Manager` from individual `Page` implementations resulted in a more maintainable and extensible codebase, enabling seamless additions of new `Page` types in without modifying the Manager class.
 
 ## 6. Overloading and Overriding: 
 Classes can have optional parameter. For example, `Date` has the attribute `moon` that tell if it's lunar date or not. Using overloaded constructor, we can create `Date` objects with different sets of input parameters for flexibility.
