@@ -16,8 +16,13 @@
   - `Date`: Attributes: `day`, `month` and boolean to determine if it's lunar date
   - `YearRange`: Attributes: `begin` and `end`, for a period of time during which something happens  
 - `'Entity`: abstract class, base for all entites. Attributes: `name` and `source`
-  - `Character`: `father`, `life`, `crowned`
-  - `Festival`:
+  - `Character`
+  - `Festival`
+  - `Reign`
+  - `Relic`
+  - `Event`
+- `Page`:
+  
 ## 3. Data Association
 
 # II. UML Diagrams
@@ -53,10 +58,7 @@ This *decoupling* of the `Manager` from individual `Page` implementations result
 
 By employing **composition**, we maintain a *cohesive* and *organized* data structure. The Database handles storage and retrieval, while the Entity class defines shared attributes and behaviors for various data entities.
 
-This design promotes code *simplicity, flexibility, and reusability*. Changes to specific `Entity` instances won't affect the overall `Database` functionality, fostering a robust and maintainable codebase.
-
-## 3. Overloading:
-Classes can have optional parameter. For example, `Date` has the attribute `moon` that tell if it's lunar date or not. Using overloaded constructor, we can create `Date` objects with different sets of input parameters for flexibility.
+This design promotes code *simplicity*, *flexibility*, and *reusability*. Changes to specific `Entity` instances won't affect the overall `Database` functionality, fostering a robust and maintainable codebase.
 
 # V. Technologies Utilized
 
